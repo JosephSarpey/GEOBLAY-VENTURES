@@ -1,65 +1,56 @@
 import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { Button } from './ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
 import { Sun, Moon, Menu } from 'lucide-react';
+import logo from '../assets/logo.jpg';
 
 interface HeaderProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
-  currentPage: string;
-  setCurrentPage: (page: string) => void;
 }
 
-export function Header({ isDarkMode, toggleDarkMode, currentPage, setCurrentPage }: HeaderProps) {
+export function Header({ isDarkMode, toggleDarkMode }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'catalog', label: 'Catalog' },
-    { id: 'vehicles', label: 'Vehicles' },
-    { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'home', path: '/', label: 'Home' },
+    { id: 'catalog', path: '/catalog', label: 'Catalog' },
+    { id: 'vehicles', path: '/vehicles', label: 'Vehicles' },
+    { id: 'about', path: '/about', label: 'About' },
+    { id: 'contact', path: '/contact', label: 'Contact' },
   ];
 
-  const handleNavClick = (pageId: string) => {
-    setCurrentPage(pageId);
-    setIsMenuOpen(false); // Close mobile menu when navigation item is clicked
-  };
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between h-16">
           {/* Logo */}
-          <button 
-            className="flex items-center space-x-3 cursor-pointer"
-            onClick={() => handleNavClick('home')}
-          >
-            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">GB</span>
-            </div>
-            <div>
-              <h1 className="text-lg font-semibold text-foreground">
-                GeoBlay Ventures
-              </h1>
-            </div>
-          </button>
+          <Link to="/" className="flex items-center space-x-3">
+            <img 
+              src={logo} 
+              alt="GeoBlay Ventures Logo" 
+              className="h-10 w-auto object-contain rounded-lg"
+            />
+            <h3 className="text-foreground">GeoBlay Ventures</h3>
+          </Link>
 
           <div className="flex items-center space-x-4">
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
-                <button
+                <NavLink
                   key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`transition-colors ${
-                    currentPage === item.id
+                  to={item.path}
+                  className={({ isActive }) => `transition-colors ${
+                    isActive
                       ? 'text-primary font-medium'
                       : 'text-muted-foreground hover:text-primary'
                   }`}
                 >
                   {item.label}
-                </button>
+                </NavLink>
               ))}
             </div>
 
@@ -91,81 +82,39 @@ export function Header({ isDarkMode, toggleDarkMode, currentPage, setCurrentPage
                     <Menu className="h-5 w-5 text-foreground" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-80">
+                <SheetContent 
+                  side="right" 
+                  className="w-80"
+                  aria-describedby="mobile-navigation-description"
+                >
+                  <p id="mobile-navigation-description" className="sr-only">
+                    Mobile navigation menu for GeoBlay Ventures website
+                  </p>
                   <SheetHeader>
                     <SheetTitle className="flex items-center space-x-3">
-                      <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">GB</span>
-                      </div>
+                      <img 
+                        src={logo} 
+                        alt="GeoBlay Ventures Logo" 
+                        className="h-8 w-auto object-contain rounded-lg"
+                      />
                       <span>GeoBlay Ventures</span>
                     </SheetTitle>
-                    <SheetDescription>
-                      Navigate through our website and explore our services, products, and company information.
-                    </SheetDescription>
                   </SheetHeader>
-                  
-                  <div className="mt-8">
-                    <nav className="flex flex-col space-y-4">
-                      {navItems.map((item) => (
-                        <button
-                          key={item.id}
-                          onClick={() => handleNavClick(item.id)}
-                          className={`text-left py-3 px-4 rounded-lg transition-colors ${
-                            currentPage === item.id
-                              ? 'bg-primary text-primary-foreground font-medium'
-                              : 'text-foreground hover:bg-muted hover:text-primary'
-                          }`}
-                        >
-                          {item.label}
-                        </button>
-                      ))}
-                    </nav>
-
-                    {/* Mobile Theme Toggle */}
-                    <div className="mt-8 pt-8 border-t border-border">
-                      <div className="flex items-center justify-between">
-                        <span className="text-foreground font-medium">Theme</span>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={toggleDarkMode}
-                          className="flex items-center gap-2"
-                          aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                        >
-                          {isDarkMode ? (
-                            <>
-                              <Sun className="h-4 w-4" />
-                              Light
-                            </>
-                          ) : (
-                            <>
-                              <Moon className="h-4 w-4" />
-                              Dark
-                            </>
-                          )}
-                        </Button>
-                      </div>
-                    </div>
-
-                    {/* Mobile Contact Info */}
-                    <div className="mt-8 pt-8 border-t border-border">
-                      <h3 className="text-foreground font-medium mb-4">Contact Us</h3>
-                      <div className="space-y-2 text-sm text-muted-foreground">
-                        <p>📞 +1 (555) 123-4567</p>
-                        <p>✉️ info@geoblayventures.com</p>
-                        <p>📍 123 Business District</p>
-                      </div>
-                    </div>
-
-                    {/* Call-to-Action in Mobile Menu */}
-                    <div className="mt-8">
-                      <Button 
-                        className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
-                        onClick={() => handleNavClick('contact')}
+                  <div className="mt-8 space-y-4">
+                    {navItems.map((item) => (
+                      <NavLink
+                        key={item.id}
+                        to={item.path}
+                        className={({ isActive }) => `block px-4 py-2 rounded-lg transition-colors ${
+                          isActive
+                            ? 'bg-primary/10 text-primary font-medium'
+                            : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
                       >
-                        Get In Touch
-                      </Button>
-                    </div>
+                        {item.label}
+                      </NavLink>
+                    ))}
                   </div>
                 </SheetContent>
               </Sheet>

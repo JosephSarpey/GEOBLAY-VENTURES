@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { Button } from '../ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
@@ -131,7 +130,7 @@ export function CatalogPage({ setCurrentPage }: CatalogPageProps) {
             <Badge className="mb-4 bg-gradient-to-r from-green-500 to-blue-500 text-white">
               General Merchandise
             </Badge>
-            <h1 className="text-4xl lg:text-5xl mb-6 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold lg:text-5xl mb-6 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
               Product Catalog
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -188,7 +187,7 @@ export function CatalogPage({ setCurrentPage }: CatalogPageProps) {
       {/* Categories */}
       <section className="py-12 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl mb-8 text-foreground text-center">Shop by Category</h2>
+          <h2 className="text-2xl font-bold mb-8 text-foreground text-center">Shop by Category</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categories.map((category) => (
               <Card

@@ -1,12 +1,10 @@
 import { Button } from "../ui/button";
 import {
   Card,
-  CardContent,
-  //CardDescription,
-  //CardHeader,
-  //CardTitle,
+  CardContent
 } from "../ui/card";
 import { Badge } from "../ui/badge";
+import { useNavigate } from 'react-router-dom';
 import {
   Users,
   Award,
@@ -20,11 +18,10 @@ import {
   Clock,
 } from "lucide-react";
 
-interface AboutPageProps {
-  setCurrentPage: (page: string) => void;
-}
 
-export function AboutPage({ setCurrentPage }: AboutPageProps) {
+export function AboutPage() {
+  const navigate = useNavigate();
+  
   const values = [
     {
       icon: Award,
@@ -111,7 +108,7 @@ export function AboutPage({ setCurrentPage }: AboutPageProps) {
             <Badge className="mb-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white">
               About Us
             </Badge>
-            <h1 className="text-4xl lg:text-5xl mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold lg:text-5xl mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
               Building Trust Through Excellence
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -144,7 +141,7 @@ export function AboutPage({ setCurrentPage }: AboutPageProps) {
               </div>
             </div>
             <div>
-              <h2 className="text-3xl lg:text-4xl mb-6 text-foreground">
+              <h2 className="text-3xl font-bold lg:text-4xl mb-6 text-foreground">
                 Our Mission & Vision
               </h2>
               <div className="space-y-6">
@@ -184,7 +181,7 @@ export function AboutPage({ setCurrentPage }: AboutPageProps) {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl mb-6 text-foreground">
+            <h2 className="text-3xl font-bold lg:text-4xl mb-6 text-foreground">
               Our Core Values
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -221,7 +218,7 @@ export function AboutPage({ setCurrentPage }: AboutPageProps) {
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl mb-6 text-foreground">
+            <h2 className="text-3xl font-bold lg:text-4xl mb-6 text-foreground">
               Our Achievements
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -255,7 +252,7 @@ export function AboutPage({ setCurrentPage }: AboutPageProps) {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl mb-6 text-foreground">
+            <h2 className="text-3xl font-bold lg:text-4xl mb-6 text-foreground">
               Meet Our Team
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -296,7 +293,7 @@ export function AboutPage({ setCurrentPage }: AboutPageProps) {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl lg:text-4xl mb-6 text-foreground">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-foreground">
                 Why Choose GeoBlay Ventures?
               </h2>
               <p className="text-muted-foreground mb-8 leading-relaxed">
@@ -391,14 +388,14 @@ export function AboutPage({ setCurrentPage }: AboutPageProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              onClick={() => setCurrentPage("contact")}
+              onClick={() => navigate('/contact')}
               variant="secondary"
               className="px-8"
             >
               Get In Touch
             </Button>
             <Button
-              onClick={() => setCurrentPage("catalog")}
+              onClick={() => navigate('/catalog')}
               variant="outline"
               className="px-8 bg-white/10 border-white/20 text-white hover:bg-white/20"
             >

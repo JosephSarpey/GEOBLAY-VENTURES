@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { Button } from '../ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
@@ -168,7 +167,7 @@ export function VehiclesPage({ setCurrentPage }: VehiclesPageProps) {
             <Badge className="mb-4 bg-gradient-to-r from-orange-500 to-red-500 text-white">
               Premium Automobiles
             </Badge>
-            <h1 className="text-4xl lg:text-5xl mb-6 bg-gradient-to-r from-orange-600 via-red-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold lg:text-5xl mb-6 bg-gradient-to-r from-orange-600 via-red-600 to-purple-600 bg-clip-text text-transparent">
               Browse Vehicles
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

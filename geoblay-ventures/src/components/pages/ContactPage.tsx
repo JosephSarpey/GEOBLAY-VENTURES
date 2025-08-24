@@ -116,7 +116,7 @@ export function ContactPage({ setCurrentPage }: ContactPageProps) {
             <Badge className="mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white">
               Contact Us
             </Badge>
-            <h1 className="text-4xl lg:text-5xl mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-orange-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold lg:text-5xl mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-orange-500 bg-clip-text text-transparent">
               Get In Touch
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

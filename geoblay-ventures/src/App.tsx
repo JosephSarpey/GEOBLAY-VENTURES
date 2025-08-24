@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/pages/HomePage';
@@ -7,11 +7,23 @@ import { CatalogPage } from './components/pages/CatalogPage';
 import { VehiclesPage } from './components/pages/VehiclesPage';
 import { AboutPage } from './components/pages/AboutPage'; 
 import { ContactPage } from './components/pages/ContactPage';
+import { NotFoundPage } from './components/pages/NotFoundPage';
+import { FloatingContactButton } from './components/FloatingContactButton';
 import './styles/globals.css';
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home');
 
   // Initialize dark mode from localStorage or system preference
   useEffect(() => {
@@ -40,44 +52,31 @@ function App() {
     }
   };
 
-  const renderCurrentPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage setCurrentPage={setCurrentPage} />;
-      case 'catalog':
-        return <CatalogPage setCurrentPage={setCurrentPage} />;
-      case 'vehicles':
-        return <VehiclesPage setCurrentPage={setCurrentPage} />;
-      case 'about':
-        return <AboutPage setCurrentPage={setCurrentPage} />;
-      case 'contact':
-        return <ContactPage setCurrentPage={setCurrentPage} />;
-      default:
-        return <HomePage setCurrentPage={setCurrentPage} />;
-    }
-  };
-
-  // Scroll to top when page changes
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage]);
-
   return (
-    <div className="min-h-screen bg-background transition-colors duration-300">
-      <Header
-        isDarkMode={isDarkMode}
-        toggleDarkMode={toggleDarkMode}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
-      
-      <main>
-        {renderCurrentPage()}
-      </main>
-      
-      <Footer setCurrentPage={setCurrentPage} />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-background transition-colors duration-300">
+        <ScrollToTop />
+        <Header
+          isDarkMode={isDarkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
+        
+        <main>
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path="/catalog" element={<CatalogPage setCurrentPage={() => {}} />} />
+            <Route path="/vehicles" element={<VehiclesPage setCurrentPage={() => {}} />} />
+            <Route path="/about" element={<AboutPage /> } />
+            <Route path="/contact" element={<ContactPage setCurrentPage={() => {}} />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+          <FloatingContactButton />
+        </main>
+        
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
-export default App
+export default App;

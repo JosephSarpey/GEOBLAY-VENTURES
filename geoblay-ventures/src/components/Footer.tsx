@@ -1,19 +1,20 @@
+import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
+import logo from '../assets/logo.jpg';
 
-interface FooterProps {
-  setCurrentPage: (page: string) => void;
-}
 
-export function Footer({ setCurrentPage }: FooterProps) {
+export function Footer() {
   return (
     <footer className="bg-muted py-12 border-t border-border">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">GB</span>
-              </div>
+              <img 
+                src={logo} 
+                alt="GeoBlay Ventures Logo" 
+                className="h-8 w-auto object-contain rounded-lg"
+              />
               <h3 className="text-foreground">GeoBlay Ventures</h3>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
@@ -25,36 +26,36 @@ export function Footer({ setCurrentPage }: FooterProps) {
             <h4 className="mb-4 text-foreground">Services</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <button
-                  onClick={() => setCurrentPage('catalog')}
-                  className="hover:text-foreground transition-colors text-left"
+                <Link
+                  to="/catalog"
+                  className="hover:text-foreground transition-colors block"
                 >
                   General Merchandise
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('vehicles')}
-                  className="hover:text-foreground transition-colors text-left"
+                <Link
+                  to="/vehicles"
+                  className="hover:text-foreground transition-colors block"
                 >
                   Automotive Sales
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('about')}
-                  className="hover:text-foreground transition-colors text-left"
+                <Link
+                  to="/about"
+                  className="hover:text-foreground transition-colors block"
                 >
                   Business Solutions
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('contact')}
-                  className="hover:text-foreground transition-colors text-left"
+                <Link
+                  to="/contact"
+                  className="hover:text-foreground transition-colors block"
                 >
                   Fleet Services
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -63,36 +64,36 @@ export function Footer({ setCurrentPage }: FooterProps) {
             <h4 className="mb-4 text-foreground">Company</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <button
-                  onClick={() => setCurrentPage('about')}
-                  className="hover:text-foreground transition-colors text-left"
+                <Link
+                  to="/about"
+                  className="hover:text-foreground transition-colors block"
                 >
                   About Us
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('about')}
-                  className="hover:text-foreground transition-colors text-left"
+                <Link
+                  to="/about#team"
+                  className="hover:text-foreground transition-colors block"
                 >
                   Our Team
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('contact')}
-                  className="hover:text-foreground transition-colors text-left"
+                <Link
+                  to="/careers"
+                  className="hover:text-foreground transition-colors block"
                 >
                   Careers
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('contact')}
-                  className="hover:text-foreground transition-colors text-left"
+                <Link
+                  to="/contact"
+                  className="hover:text-foreground transition-colors block"
                 >
                   Contact
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
